@@ -104,7 +104,7 @@ def get_ports():
     return port_objects
 
 
-if __name__ == '__main__':
+def main():
     import argparse
     import time
 
@@ -144,3 +144,7 @@ if __name__ == '__main__':
     if args.save:
         time.sleep(20)
         active_port.set_mode(current_mode.width, current_mode.height, current_mode.rate, current_mode.interlaced)
+
+
+if __name__ == '__main__':
+    main()

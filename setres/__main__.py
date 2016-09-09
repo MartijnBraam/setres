@@ -136,6 +136,7 @@ if __name__ == '__main__':
         if args.interlaced:
             print("Cannot create interlaced resolutions")
             exit(1)
+        print("Adding new mode to {}".format(active_port.name))
         active_port.add_mode(args.width, args.height, args.rate)
 
     current_mode = active_port.get_mode()

@@ -14,8 +14,8 @@ $ setres --port VGA1 1920 1080
 # Gloat about your expensive hardware. Setting to UHD @ 140Hz
 $ setres --port DP1 --rate 140 3840 2160
 
-# For your own safety set the --save flag
-$ setres --port VGA1 --save 1280 1280
+# For your own safety set the --safe flag
+$ setres --port VGA1 --safe 1280 1280
 # This sets the resolution for 20 seconds and then changes it back to the previous setting.
 
 # For setting 1080i

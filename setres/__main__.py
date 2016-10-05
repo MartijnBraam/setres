@@ -122,7 +122,7 @@ def main():
     parser.add_argument('--rate', type=float, help='Refresh rate')
     parser.add_argument('--port', type=str, help="Use this port if multiple exist", default=primary, choices=port_list)
     parser.add_argument('--interlaced', action='store_true', help='Make the resolution interlaced', default=False)
-    parser.add_argument('--save', action='store_true', help='Try the mode for 20 seconds and return to old mode',
+    parser.add_argument('--safe', action='store_true', help='Try the mode for 20 seconds and return to old mode',
                         default=False)
     args = parser.parse_args()
 
@@ -141,7 +141,7 @@ def main():
 
     current_mode = active_port.get_mode()
     active_port.set_mode(args.width, args.height, args.rate, args.interlaced)
-    if args.save:
+    if args.safe:
         time.sleep(20)
         active_port.set_mode(current_mode.width, current_mode.height, current_mode.rate, current_mode.interlaced)
 

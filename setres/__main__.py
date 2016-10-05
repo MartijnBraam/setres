@@ -50,6 +50,8 @@ class Port:
                 if '*' in rate:
                     current = True
                 rate = rate.replace('+', '').replace('*', '')
+                if rate.strip() == '':
+                    continue
                 rate = float(rate)
                 self.modes.append(Mode(parts[0], width, height, rate, interlaced, custom, current))
 

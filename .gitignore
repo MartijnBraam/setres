@@ -2,3 +2,4 @@
 /build
 /dist
 /setres.egg-info
+/test.py

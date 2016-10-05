@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='setres',
-      version='0.3',
+      version='0.4',
       description='Set the resolution in xorg',
       url='http://github.com/MartijnBraam/setres',
       author='Martijn Braam',

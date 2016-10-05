@@ -1,7 +1,7 @@
 import subprocess
 import re
 
-REGEX_PORTS = re.compile(r'^([eA-Z]+\d+) (connected|disconnected) (primary|).+?$([0-9x *\n\.\+i_]+)', re.MULTILINE)
+REGEX_PORTS = re.compile(r'^([eA-Z\-]+\d+) (connected|disconnected) (primary|).+?$([0-9x *\n\.\+i_]+)', re.MULTILINE)
 
 
 class Mode:

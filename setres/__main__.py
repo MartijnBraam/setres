@@ -1,6 +1,8 @@
 import subprocess
 import re
 
+import sys
+
 REGEX_PORTS = re.compile(r'^([eA-Z\-]+\d+) (connected|disconnected) (primary|).+?$([0-9x *\n\.\+i_]+)', re.MULTILINE)
 
 
@@ -122,16 +124,33 @@ def main():
     parser.add_argument('width', type=int, help="Horisontal resolution")
     parser.add_argument('height', type=int, help="Vertical resolution")
     parser.add_argument('--rate', type=float, help='Refresh rate')
-    parser.add_argument('--port', type=str, help="Use this port if multiple exist", default=primary, choices=port_list)
+    parser.add_argument('--port', '--output', type=str, help="Use this port if multiple exist", default=primary,
+                        choices=port_list)
     parser.add_argument('--interlaced', action='store_true', help='Make the resolution interlaced', default=False)
     parser.add_argument('--safe', action='store_true', help='Try the mode for 20 seconds and return to old mode',
                         default=False)
+    parser.add_argument('--list', action='store_true')
+
+    # Ugly hack so --list can be used with specifying the required width and height
+    if '--list' in sys.argv:
+        sys.argv.extend(['0', '0'])
+
     args = parser.parse_args()
 
     active_port = None
     for port in ports:
         if port.name == args.port:
             active_port = port
+
+    if args.list:
+        for port in ports:
+            if port.connected:
+                mode = port.get_mode()
+                primary_str = ' primary' if port.primary else ''
+                print('{:9} {}x{}@{}{}'.format(port.name, mode.width, mode.height, mode.rate, primary_str))
+            else:
+                print('{}'.format(port.name))
+        exit(0)
 
     if not active_port.has_mode(args.width, args.height, args.rate, args.interlaced):
         print("This mode does not exist for port {}".format(args.port))
